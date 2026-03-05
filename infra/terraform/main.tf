@@ -2,7 +2,7 @@ terraform {
   required_version = ">= 1.5.0"
 
   backend "s3" {
-    bucket         = "devops-accelerator-platform-tf-state-rajvardhan"
+    bucket         = "devops-accelerator-platform-tf-state-raj"
     key            = "global/devops-accelerator/terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "devops-accelerator-tf-locker"
@@ -369,3 +369,4 @@ resource "aws_iam_role_policy_attachment" "lambda_sns_policy_attachment" {
   policy_arn = aws_iam_policy.devops_accelerator_lambda_sns_policy.arn
 
 }
+
