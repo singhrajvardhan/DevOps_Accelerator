@@ -5,14 +5,8 @@ on:
     branches:
       - main
 
-env:
-  AWS_REGION: us-east-1
-  TF_VAR_upload_bucket_name: ${{ secrets.UPLOAD_BUCKET_NAME }}
-  TF_VAR_aws_region: us-east-1
-
 jobs:
   terraform:
-    name: Terraform Apply
     runs-on: ubuntu-latest
 
     defaults:
@@ -33,20 +27,19 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: us-east-1
 
-      - name: Terraform Init (Reconfigure)
-        run: terraform init -reconfigure
+      - name: Terraform Init
+        run: terraform init
 
+      - name: Terraform Plan
+        run: terraform plan
 
-       - name: Terraform Plan
-         run: terraform plan
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
 
-       - name: Terraform Apply
-         env:
-           GZIP: "false"
-         run: terraform apply -auto-approve
-
+      - name: Show Terraform Outputs
+        run: terraform output
      # - name: Terraform Destroy
     #    env:
      #     GZIP: "false"
