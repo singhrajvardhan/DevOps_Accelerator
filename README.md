@@ -26,6 +26,7 @@ This DevOps Accelerator enables users to
 5. Lambda processes the file and logs the result in CloudWatch.
 6. SNS alert sent to the owner after successful processing.
 
+
 ---
 
 
